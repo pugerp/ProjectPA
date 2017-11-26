@@ -17,7 +17,7 @@ public class Splash extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        Log.i("test","TEST");
+        Log.i("test","TEST2");
         setContentView(R.layout.activity_splash);
     };
 
