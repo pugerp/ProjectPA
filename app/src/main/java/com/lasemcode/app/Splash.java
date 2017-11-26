@@ -2,6 +2,7 @@ package com.lasemcode.app;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -16,6 +17,7 @@ public class Splash extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        Log.i("test","TEST");
         setContentView(R.layout.activity_splash);
     };
 
