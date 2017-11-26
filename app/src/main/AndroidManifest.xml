@@ -17,9 +17,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Registrasi_Activity" />
-        <activity android:name=".Dasboard" />
-        <activity android:name=".Splash"
+        <activity android:name=".RegistrasiActivity" />
+        <activity android:name=".DasboardActivity" />
+        <activity android:name=".SplashActivity"
         android:theme="@style/Splash"></activity>
     </application>
 

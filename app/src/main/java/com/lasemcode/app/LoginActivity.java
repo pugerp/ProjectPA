@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                 editor.putString(KEYPASSWORD, pass);
                 editor.apply();
 
-                Intent intent = new Intent(this, Dasboard.class);
+                Intent intent = new Intent(this, DasboardActivity.class);
                 startActivity(intent);
 
                 clearForm();
@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
         if(getUser().length() != 0){
             Log.i("test","tidak sama dengan 0");
-            Intent i = new Intent(this,Dasboard.class);
+            Intent i = new Intent(this,DasboardActivity.class);
             startActivity(i);
             finish();
         }else {

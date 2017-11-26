@@ -11,7 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class Dasboard extends AppCompatActivity {
+public class DasboardActivity extends AppCompatActivity {
     public static final String KEYPREF     = "LocalData";
     @Override
     protected void onCreate(Bundle savedInstanceState) {

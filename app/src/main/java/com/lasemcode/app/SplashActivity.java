@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class Splash extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
 
     private static int splashInterval = 2000;
 

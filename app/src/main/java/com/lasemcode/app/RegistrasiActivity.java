@@ -3,7 +3,7 @@ package com.lasemcode.app;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Registrasi_Activity extends AppCompatActivity {
+public class RegistrasiActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
