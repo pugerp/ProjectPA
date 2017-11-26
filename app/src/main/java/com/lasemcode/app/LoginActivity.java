@@ -1,7 +1,9 @@
 package com.lasemcode.app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -16,9 +18,9 @@ public class LoginActivity extends AppCompatActivity {
     EditText userName,passWord;
     Button btnMasuk;
     SharedPreferences preferences;
-    public static final String KEYPREF     = "Key Preferences";
-    public static final String KEYUSERNAME = "Key Username";
-    public static final String KEYPASSWORD = "Key Password";
+    public static final String KEYPREF     = "LocalData";
+    public static final String KEYUSERNAME = "Username";
+    public static final String KEYPASSWORD = "Password";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,12 +50,52 @@ public class LoginActivity extends AppCompatActivity {
         public void loginAkun(View view) {
             String user = userName.getText().toString();
             String pass = passWord.getText().toString();
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putString(KEYUSERNAME, user);
-            editor.putString(KEYPASSWORD, pass);
-            editor.apply();
-            Toast.makeText(this, "Username dan Password Success", Toast.LENGTH_SHORT).show();
+            Log.i("test",pass);
+            if(user.equals("pugerp") && pass.equals("asd123")){
+                Log.i("test","test2");
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString(KEYUSERNAME, user);
+                editor.putString(KEYPASSWORD, pass);
+                editor.apply();
+
+                Intent intent = new Intent(this, Dasboard.class);
+                startActivity(intent);
+
+                clearForm();
+
+                Toast.makeText(this, "Username dan Password Success", Toast.LENGTH_SHORT).show();
+                finish();
+            }else{
+                Toast.makeText(this, "Username dan Password ada yang salah", Toast.LENGTH_SHORT).show();
+                clearForm();
+            }
+
+
 
         }
+
+        public void clearForm(){
+            userName.setText("");
+            passWord.setText("");
+        }
+
+        public String getUser(){
+            SharedPreferences pref = getSharedPreferences(KEYPREF, Context.MODE_PRIVATE);
+            return pref.getString(KEYUSERNAME,"");
+        }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(getUser().length() != 0){
+            Log.i("test","tidak sama dengan 0");
+            Intent i = new Intent(this,Dasboard.class);
+            startActivity(i);
+            finish();
+        }else {
+            Log.i("test","sama dengan 0");
+            clearForm();
+        }
+    }
 }
 
