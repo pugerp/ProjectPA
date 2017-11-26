@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_activity);
+        setContentView(R.layout.activity_login);
 
         userName = (EditText) findViewById(R.id.userName);
         passWord = (EditText) findViewById(R.id.passWord);
@@ -87,15 +87,15 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if(getUser().length() != 0){
-            Log.i("test","tidak sama dengan 0");
-            Intent i = new Intent(this,DasboardActivity.class);
-            startActivity(i);
-            finish();
-        }else {
-            Log.i("test","sama dengan 0");
-            clearForm();
-        }
+//        if(getUser().length() != 0){
+//            Log.i("test","tidak sama dengan 0");
+//            Intent i = new Intent(this,DasboardActivity.class);
+//            startActivity(i);
+//            finish();
+//        }else {
+//            Log.i("test","sama dengan 0");
+//            clearForm();
+//        }
     }
 }
 

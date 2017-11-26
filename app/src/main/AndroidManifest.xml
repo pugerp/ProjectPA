@@ -11,16 +11,17 @@
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.LoginStyle">
+        </activity>
+        <activity android:name=".RegistrasiActivity" />
+        <activity android:name=".DasboardActivity" />
+        <activity android:name=".SplashActivity"
+        android:theme="@style/Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegistrasiActivity" />
-        <activity android:name=".DasboardActivity" />
-        <activity android:name=".SplashActivity"
-        android:theme="@style/Splash"></activity>
     </application>
 
 </manifest>
