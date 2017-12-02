@@ -8,7 +8,7 @@
     tools:context="com.lasemcode.app.DasboardActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:orientation="vertical"
@@ -26,7 +26,7 @@
 
         <EditText
             android:id="@+id/editText"
-            android:layout_width="328dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:paddingTop="30dp"
@@ -45,62 +45,72 @@
             android:textColor="@android:color/white" />
 
         <EditText
-            android:id="@+id/Longitude"
+            android:id="@+id/editLongitude"
             android:layout_width="328dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:paddingTop="20dp"
             android:paddingBottom="20dp"
-            android:textColor="@android:color/white"
-            android:text="Longitude" />
+            android:paddingTop="20dp"
+            android:text="Longitude"
+            android:textColor="@android:color/white" />
 
         <EditText
-            android:id="@+id/Latitude"
+            android:id="@+id/editLatitude"
             android:layout_width="328dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
             android:inputType="textPersonName"
-            android:textColor="@android:color/white"
-            android:text="Latitude" />
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
+            android:text="Latitude"
+            android:textColor="@android:color/white" />
 
         <EditText
-            android:id="@+id/btnKeterangan"
+            android:id="@+id/editAlamat"
             android:layout_width="328dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/linearLayout"
             android:layout_marginTop="14dp"
             android:ems="10"
-            android:textColor="@android:color/white"
             android:inputType="textPersonName"
-            android:text="Keterangan Kerusakan Jalan" />
+            android:text="Alamat"
+            android:textColor="@android:color/white" />
+
+        <EditText
+            android:id="@+id/Keterangan"
+            android:layout_width="328dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearLayout"
+            android:layout_marginTop="14dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Keterangan Kerusakan Jalan"
+            android:textColor="@android:color/white" />
+
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="116dp"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="62dp"
+        android:layout_marginTop="8dp"
         android:layout_below="@+id/linearLayout"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
         <Button
             android:id="@+id/button5"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="LAPORKAN!"
             android:textColor="@android:color/white"
             android:background="#CE93D8"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="25dp"
-            android:layout_marginStart="25dp" />
+            />
     </RelativeLayout>
 
 
