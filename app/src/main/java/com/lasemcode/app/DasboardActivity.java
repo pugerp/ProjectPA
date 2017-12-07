@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,12 +22,18 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -36,12 +43,14 @@ import java.io.OutputStream;
 
 public class DasboardActivity extends AppCompatActivity {
     public static final String KEYPREF     = "LocalData";
+    public static final String KEYUSERNAME = "Username";
     int PLACE_PICKER_REQUEST = 1, REQUEST_CAMERA = 2, SELECT_FILE = 0;
-    Button btnLocation, btnPhoto;
-    EditText alamat, latitude, photoPath, longtitude;
+    Button btnLocation, btnPhoto, Lapor;
+    EditText alamat, latitude, photoPath, longtitude,keterangan;
     WebView attributionText;
     Uri UrlGambar;
     File file;
+    SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +62,14 @@ public class DasboardActivity extends AppCompatActivity {
         photoPath = (EditText) findViewById(R.id.editPhoto);
         latitude = (EditText) findViewById(R.id.editLatitude);
         longtitude = (EditText) findViewById(R.id.editLongitude);
+        Lapor = (Button) findViewById(R.id.btnLapor);
+        keterangan = (EditText) findViewById(R.id.editKeterangan);
+
+//        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference databasePengaduan = FirebaseDatabase.getInstance().getReference("pengaduan");
+        preferences = getSharedPreferences(KEYPREF, Context.MODE_PRIVATE);
+        final String pengguna = preferences.getString(KEYUSERNAME, "");
+
         btnLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,6 +86,56 @@ public class DasboardActivity extends AppCompatActivity {
         });
 
 
+        Lapor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                databasePengaduan.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        int count = (int) ((dataSnapshot.getChildrenCount())+1);
+//                        String countData = String.valueOf(count);
+//                        String id = "pengaduan_"+countData;
+                        Pengaduan pengaduan = new Pengaduan(alamat.getText().toString(), photoPath.getText().toString(), keterangan.getText().toString(), latitude.getText().toString(), longtitude.getText().toString(), pengguna);
+                        String id = databasePengaduan.push().getKey();
+                        databasePengaduan.child(id).setValue(pengaduan);
+                        Intent in = new Intent(DasboardActivity.this, DaftarPengaduanActivity.class);
+                        clearForm();
+                        startActivity(in);
+                        finish();
+
+
+//                        if(Integer.parseInt(countData)  == 0){
+//                            int no = 1;
+//                            String idPengaduan = "pengaduan_"+no;
+//                            Pengaduan pengaduan = new Pengaduan(alamat.getText().toString(), photoPath.getText().toString(), keterangan.getText().toString(), latitude.getText().toString(), longtitude.getText().toString(), pengguna);
+//                            mDatabase.child(idPengaduan).setValue(pengaduan);
+//                            Intent intent = new Intent(DasboardActivity.this, DaftarPengaduanActivity.class);
+//                            startActivity(intent);
+//                            clearForm();
+//                            finish();
+//                            Toast.makeText(getApplicationContext(), "Pengaduan berhasil", Toast.LENGTH_SHORT);
+//                        }else{
+//                            int jmlPengaduan = Integer.parseInt(countData) + 1;
+//                            String idPengaduan = "pengaduan_"+jmlPengaduan;
+//                            Pengaduan pengaduan = new Pengaduan(alamat.getText().toString(), photoPath.getText().toString(), keterangan.getText().toString(), latitude.getText().toString(), longtitude.getText().toString(), pengguna);
+//                            mDatabase.child(idPengaduan).setValue(pengaduan);
+//                            Intent intent = new Intent(DasboardActivity.this, DaftarPengaduanActivity.class);
+//                            startActivity(intent);
+//                            clearForm();
+//                            finish();
+//                            Toast.makeText(getApplicationContext(), "Pengaduan berhasil", Toast.LENGTH_SHORT);
+//                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+
+
     }
 
     @Override
@@ -77,8 +144,8 @@ public class DasboardActivity extends AppCompatActivity {
             case R.id.btnLogout:
                 Log.i("test","logout");
                 Intent i = new Intent(this,LoginActivity.class);
-                SharedPreferences pref = getSharedPreferences(KEYPREF, Context.MODE_PRIVATE);
-                SharedPreferences.Editor edit = pref.edit();
+                preferences = getSharedPreferences(KEYPREF, Context.MODE_PRIVATE);
+                SharedPreferences.Editor edit = preferences.edit();
                 edit.clear();
                 edit.commit();
                 startActivity(i);
@@ -96,6 +163,14 @@ public class DasboardActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_logout, menu);
         return true;
 
+    }
+
+    public void clearForm(){
+        photoPath.setText("");
+        latitude.setText("");
+        longtitude.setText("");
+        alamat.setText("");
+        keterangan.setText("");
     }
 
     public void getLocation(){

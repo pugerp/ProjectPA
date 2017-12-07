@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,12 +24,15 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText userName,passWord;
     Button btnMasuk;
+    TextView btnSignUp;
     SharedPreferences preferences;
     DatabaseReference mDatabase;
     FirebaseDatabase database;
     public static final String KEYPREF     = "LocalData";
     public static final String KEYUSERNAME = "Username";
     public static final String KEYPASSWORD = "Password";
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         userName = (EditText) findViewById(R.id.userName);
         passWord = (EditText) findViewById(R.id.passWord);
         btnMasuk = (Button) findViewById(R.id.masuk);
+        btnSignUp = (TextView) findViewById(R.id.signUp);
 
         preferences = getSharedPreferences(KEYPREF, Context.MODE_PRIVATE);
         database = FirebaseDatabase.getInstance();
@@ -48,6 +53,15 @@ public class LoginActivity extends AppCompatActivity {
             passWord.setText(preferences.getString(KEYPASSWORD, ""));
         }
 
+
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(LoginActivity.this, RegistrasiActivity.class);
+                startActivity(in);
+                finish();
+            }
+        });
         btnMasuk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,5 +131,7 @@ public class LoginActivity extends AppCompatActivity {
 //            clearForm();
 //        }
     }
+
+
 }
 

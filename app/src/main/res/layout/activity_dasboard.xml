@@ -12,26 +12,39 @@
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:orientation="vertical"
-        android:id="@+id/linearLayout">
+        android:id="@+id/linearLayout"
+        android:weightSum="1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
-        <Button
-            android:id="@+id/btnSelectPhoto"
-            android:layout_width="143dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select Photo"
-            android:drawableLeft="@drawable/ic_camera"
-            android:drawableTint="@android:color/white"
-            android:textColor="@android:color/white"
-            android:background="#CE93D8" />
+            android:layout_weight="0.09"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/editPhoto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:paddingTop="30dp"
-            android:text="" />
+            <EditText
+                android:id="@+id/editPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:enabled="false"
+                android:inputType="textPersonName"
+                android:paddingTop="30dp" />
+
+            <Button
+                android:id="@+id/btnSelectPhoto"
+                android:layout_width="143dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#CE93D8"
+                android:drawableLeft="@drawable/ic_camera"
+                android:drawableTint="@android:color/white"
+                android:text="Select Photo"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/location"
@@ -49,10 +62,10 @@
             android:layout_width="328dp"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Longtitude"
             android:inputType="textPersonName"
             android:paddingBottom="20dp"
             android:paddingTop="20dp"
-            android:text="Longitude"
             android:textColor="@android:color/white" />
 
         <EditText
@@ -60,10 +73,10 @@
             android:layout_width="328dp"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Latitude"
             android:inputType="textPersonName"
             android:paddingBottom="20dp"
             android:paddingTop="20dp"
-            android:text="Latitude"
             android:textColor="@android:color/white" />
 
         <EditText
@@ -73,19 +86,19 @@
             android:layout_below="@+id/linearLayout"
             android:layout_marginTop="14dp"
             android:ems="10"
+            android:hint="Alamat"
             android:inputType="textPersonName"
-            android:text="Alamat"
             android:textColor="@android:color/white" />
 
         <EditText
-            android:id="@+id/Keterangan"
+            android:id="@+id/editKeterangan"
             android:layout_width="328dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/linearLayout"
             android:layout_marginTop="14dp"
             android:ems="10"
+            android:hint="Keterangan Kerusakan Jalan"
             android:inputType="textPersonName"
-            android:text="Keterangan Kerusakan Jalan"
             android:textColor="@android:color/white" />
 
     </LinearLayout>
@@ -99,13 +112,13 @@
         android:layout_alignParentStart="true">
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/btnLapor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="LAPORKAN!"
-            android:textColor="@android:color/white"
             android:background="#CE93D8"
-            />
+            android:text="LAPORKAN!"
+            android:layout_marginTop="50dp"
+            android:textColor="@android:color/white" />
     </RelativeLayout>
 
 

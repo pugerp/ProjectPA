@@ -1,5 +1,7 @@
 package com.lasemcode.app;
 
+import android.widget.EditText;
+
 /**
  * Created by Z & N on 07/12/2017.
  */
