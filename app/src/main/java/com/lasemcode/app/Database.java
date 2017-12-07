@@ -25,7 +25,19 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String createTablePengaduan = "CREATE TABLE pengaduan(" + "idPengaduan INTEGER PRIMARY KEY, " + "idUser INTEGER, " + ");";
+        String createTablePengaduan = "CREATE TABLE pengaduan(" + "idPengaduan INTEGER PRIMARY KEY, " +
+                "idPengguna INTEGER, " +
+                "fotoKerusakan TEXT, " +
+                "latitude INTEGER, " +
+                "longtitude INTEGER, " +
+                "tglPengaduan DATE," +
+                "keterangan TEXT);";
+        String createTablePengguna = "CREATE TABLE pengguna(" + "idPengguna INTEGER PRIMARY KEY, " +
+                "nmPengguna TEXT, " +
+                "noTelepon TEXT, " +
+                "email TEXT);";
+        sqLiteDatabase.execSQL(createTablePengaduan);
+        sqLiteDatabase.execSQL(createTablePengguna);
     }
 
     @Override

@@ -12,12 +12,20 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 
 public class LoginActivity extends AppCompatActivity {
 
     EditText userName,passWord;
     Button btnMasuk;
     SharedPreferences preferences;
+    DatabaseReference mDatabase;
+    FirebaseDatabase database;
     public static final String KEYPREF     = "LocalData";
     public static final String KEYUSERNAME = "Username";
     public static final String KEYPASSWORD = "Password";
@@ -32,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
         btnMasuk = (Button) findViewById(R.id.masuk);
 
         preferences = getSharedPreferences(KEYPREF, Context.MODE_PRIVATE);
+        database = FirebaseDatabase.getInstance();
+        mDatabase = database.getReference("pengguna");
 
         if (preferences.contains(KEYUSERNAME) && (preferences.contains(KEYPASSWORD))) {
             userName.setText(preferences.getString(KEYUSERNAME, ""));
@@ -48,30 +58,40 @@ public class LoginActivity extends AppCompatActivity {
     }
 
         public void loginAkun(View view) {
-            String user = userName.getText().toString();
-            String pass = passWord.getText().toString();
-            Log.i("test",pass);
-            if(user.equals("pugerp") && pass.equals("asd123")){
-                Log.i("test","test2");
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString(KEYUSERNAME, user);
-                editor.putString(KEYPASSWORD, pass);
-                editor.apply();
+            final String user = userName.getText().toString();
+            final String pass = passWord.getText().toString();
+            mDatabase.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.child(user).exists()){
+                        Pengguna pengguna = dataSnapshot.child(user).getValue(Pengguna.class);
 
-                Intent intent = new Intent(this, DasboardActivity.class);
-                startActivity(intent);
+                        if(pengguna.getPassword().equals(pass)){
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.putString(KEYUSERNAME, user);
+                            editor.putString(KEYPASSWORD, pass);
+                            editor.apply();
 
-                clearForm();
+                            Intent intent = new Intent(LoginActivity.this, DasboardActivity.class);
+                            startActivity(intent);
 
-                Toast.makeText(this, "Username dan Password Success", Toast.LENGTH_SHORT).show();
-                finish();
-            }else{
-                Toast.makeText(this, "Username dan Password ada yang salah", Toast.LENGTH_SHORT).show();
-                clearForm();
-            }
+                            clearForm();
+                            finish();
+                            Toast.makeText(getApplicationContext(), "Login Berhasil", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(LoginActivity.this, "Password Salah",Toast.LENGTH_SHORT).show();
+                        }
 
+                    }else{
+                        Toast.makeText(LoginActivity.this, "Usernama Salah",Toast.LENGTH_SHORT).show();
+                    }
+                }
 
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
+                }
+            });
         }
 
         public void clearForm(){

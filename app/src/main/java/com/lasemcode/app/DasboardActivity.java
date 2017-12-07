@@ -29,6 +29,10 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class DasboardActivity extends AppCompatActivity {
     public static final String KEYPREF     = "LocalData";
@@ -113,9 +117,9 @@ public class DasboardActivity extends AppCompatActivity {
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                file = new File(Environment.getExternalStorageDirectory(), "Foto Jalan Rusak/img_" + String.valueOf(System.currentTimeMillis()) + ".jpg");
                 if(items[i].equals("Camera")){
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    file = new File(Environment.getExternalStorageDirectory(), "Foto Jalan Rusak/img_" + String.valueOf(System.currentTimeMillis()) + ".jpg");
                     UrlGambar = Uri.fromFile(file);
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, UrlGambar);
                     startActivityForResult(intent, REQUEST_CAMERA);
@@ -142,6 +146,7 @@ public class DasboardActivity extends AppCompatActivity {
             if(requestCode == REQUEST_CAMERA){
                 path = file.getPath();
             }else if(requestCode == SELECT_FILE){
+                String outputPath = "/storage/emulated/0/Foto Jalan Rusak/";
                 UrlGambar = data.getData();
                 path = getRealPath(UrlGambar);
                 if(path == null){
@@ -175,4 +180,32 @@ public class DasboardActivity extends AppCompatActivity {
         cursor.close();
         return path;
     }
+
+//    private void copyFile(String inputPath, String inputFile, String outputPath){
+//        InputStream in = null;
+//        OutputStream out = null;
+//        try{
+//            File dir = new File(outputPath);
+//            if(!dir.exists()){
+//                dir.mkdirs();
+//            }
+//
+//            in = new FileInputStream(inputPath + inputFile);
+//            out = new FileOutputStream(outputPath + inputFile);
+//
+//            byte[] buffer = new byte[1024];
+//            int read;
+//
+//            while ((read = in.read(buffer)) != -1){
+//                out.write(buffer,0,read);
+//            }
+//            in.close();
+//            in = null;
+//
+//            out.flush();
+//            out = null;
+//        }catch (Exception e){
+//            Log.i("Tag",e.getMessage());
+//        }
+//    }
 }

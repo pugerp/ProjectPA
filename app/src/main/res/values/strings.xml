@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">DINAS PUPR</string>
-    <string name="google_api_key">AIzaSyB6wbLLD2OmSl47CGgHu7TojECtUqI0odk</string>
+    <string name="place_picker_key">AIzaSyB6wbLLD2OmSl47CGgHu7TojECtUqI0odk</string>
 </resources>

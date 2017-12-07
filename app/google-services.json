@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "92017964902",
+    "firebase_url": "https://projectpa-8b2ac.firebaseio.com",
+    "project_id": "projectpa-8b2ac",
+    "storage_bucket": "projectpa-8b2ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:92017964902:android:824bc8a9adfb1099",
+        "android_client_info": {
+          "package_name": "com.lasemcode.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "92017964902-bav6hi3ol3u9ndcbu5rtlt5j3gv6k2fh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lasemcode.app",
+            "certificate_hash": "185177e6f45fa727f161f1f7c30418f1803db25c"
+          }
+        },
+        {
+          "client_id": "92017964902-ee3uo467andcm87richt5cse1lm19tk8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYu6598h8Do4hSweU_OHB_Cee2KYNA6Ow"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "92017964902-ee3uo467andcm87richt5cse1lm19tk8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
